@@ -1,0 +1,61 @@
+/* BUTTON STYLES */
+.btn {
+    text-decoration: none;
+    background-color: $primary-lighter;
+    border: 1px solid $secondary-color;
+    border-radius: 20px;
+    padding: .25rem .75rem;
+    margin: .5rem 0;
+    color: $secondary-color;
+    min-width: 5rem;
+    max-width: 10rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 2rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: $secondary-color;
+    border: 1px solid $primary-lighter;
+    color: $primary-lighter;
+}
+
+.btn--red {
+    background-color: red;
+    border: 1px solid $secondary-color;
+    color: $secondary-color;
+}
+
+.btn--red:hover {
+    background-color: $secondary-color;
+    border: 1px solid red;
+    color: red;
+}
+
+.btn--xsmall {
+    max-width: 1.5rem;
+    min-width: 1.5rem;
+    padding: .1rem .25rem;
+    margin: 0 .25rem;
+}
+
+.btn--small {
+    min-width: 1rem;
+    max-width: 5rem;
+    padding: .05rem .5rem;
+}
+
+.btn--md {
+    min-width: 3rem;
+    max-width: 8rem;
+    font-size: .75rem;
+}
+
+.btn--square {
+    border-radius: 0;
+}
+/* END BUTTON STYLES */

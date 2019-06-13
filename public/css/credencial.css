@@ -1,0 +1,67 @@
+.credencial {
+  font-size: 0.8rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  width: 453px;
+  height: 226px;
+  border: 1px solid black;
+  position: relative;
+  margin: 2em auto;
+  text-transform: uppercase;
+}
+
+.card__content {
+  height: 155.4px;
+  padding: 12px 18px;
+  border-top: 12px solid orange;
+  border-bottom: 12px solid orange;
+  width: 417px;
+}
+
+.card__section {
+  margin: 12px 0;
+  position: relative;
+}
+
+.card__header {
+  color: white;
+  text-align: center;
+  padding: 6px 0;
+  background-color: #082d4b;
+  height: 10.6px;
+}
+
+.card__title {
+  font-size: 0.75rem;
+  color: #155181;
+}
+
+.card__logo {
+  width: 151px;
+  height: 56.5px;
+}
+
+.card__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.inline {
+  display: inline;
+}
+
+.txt-bolder {
+  font-weight: 800;
+}
+
+.rut {
+  font-size: 1.7em;
+}
+
+.direccion {
+  font-size: 0.9em;
+}
+

@@ -1,0 +1,27 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+body {
+    display: flex;
+    font-family: $font-family-sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1em;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+// Modifiers
+.half-width {width: 50%;}
+.full-width {width: 100%;}
+.third-width {width: calc(100%/3);}
+.fourth-width {width: 25%;}
+
+.center {align-self: center;}

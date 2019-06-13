@@ -1,0 +1,65 @@
+
+.credencial {
+    font-size: .8rem;
+    font-family: $font-family-sans-serif;
+}
+
+.card { 
+    width: $card-width;
+    height: $card-height;
+    border: 1px solid black;
+    position: relative;
+    margin: 2em auto;
+    text-transform: uppercase;
+    
+    &__content {
+        height: ($card-height*0.9 - ($padding*4));
+        padding: ($padding) ($padding*1.5);
+        border-top: $padding solid orange;
+        border-bottom: $padding  solid orange;
+        width: $card-width - (3*$padding);
+    }
+
+    &__section {
+        margin: $padding 0;
+        position: relative;
+    }
+    
+    &__header {
+        color: white;
+        text-align: center;
+        padding: $padding/2 0;
+        background-color: $blue-darker;
+        height: ($card-height*0.1 - $padding);
+    }
+
+    &__title {
+        font-size: .75rem;
+        color: $blue;
+    }
+
+    &__logo {
+        width: ($card-width/3);
+        height: $card-height/4;
+    }
+
+    &__logo img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    
+}
+
+
+.inline {
+    display: inline
+}
+
+.txt-bolder {
+    font-weight: 800;
+}
+
+.rut {font-size: 1.7em;}
+
+.direccion {font-size: .9em;}
