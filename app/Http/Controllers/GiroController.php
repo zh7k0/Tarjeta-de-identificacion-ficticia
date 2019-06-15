@@ -15,7 +15,7 @@ class GiroController extends Controller
     public function index()
     {
         $giros = Giro::all();
-        return view('listaGiros', ['giros' => $giros]);
+        return view('giro.listaGiros', ['giros' => $giros]);
     }
 
     /**
@@ -29,7 +29,7 @@ class GiroController extends Controller
         $data['title'] = 'Nuevo Giro';
         $data['action'] = 'GiroController@store';
         $data['method'] = 'post';
-        return view('form_giro', $data);
+        return view('giro.create-edit', $data);
     }
 
     /**
@@ -74,7 +74,7 @@ class GiroController extends Controller
         $data['title'] = 'Editar Giro';
         $data['action'] = ['GiroController@update', 'giro' => $giro->id];
         $data['method'] = 'put';
-        return view('form_giro', $data);
+        return view('giro.create-edit', $data);
     }
 
     /**
@@ -88,7 +88,7 @@ class GiroController extends Controller
     {
         $updated = $giro->update($request->only('nombre'));
         if ($updated){
-            return redirect()->route('giros.index')->withErrors('Actualizado giro correctamente');
+            return redirect()->route('giros.index')->with(['message' => 'Actualizado giro correctamente', 'status' => true]);
         }
         return back()->withInput()->withErrors($e->getMessage());
     }

@@ -15,7 +15,7 @@ class ContribuyenteController extends Controller
     public function index()
     {
         $contribuyentes = Contribuyente::with('giro')->get();
-        return view('listaContribuyentes', ['contribuyentes' => $contribuyentes, 'title' => $this->nombre.'s']);
+        return view('contribuyente.listaContribuyentes', ['contribuyentes' => $contribuyentes, 'title' => $this->nombre.'s']);
     }
 
     /**
@@ -33,7 +33,7 @@ class ContribuyenteController extends Controller
         if (empty($data['giros'])){
             return redirect()->route('lista_contribuyentes')->with(['message' => 'Error: Cree al menos un giro antes de crear una nueva empresa.', 'status' => false]);
         }
-        return view('form_contribuyente', $data);
+        return view('contribuyente.create-edit', $data);
     }
 
     /**
@@ -85,7 +85,7 @@ class ContribuyenteController extends Controller
         $data['method'] = 'put';
         $data['action'] = ['ContribuyenteController@update', 'rut' => $contribuyente->rut];
         $data['title'] = 'Editar '. $this->nombre;
-        return view('form_contribuyente', $data);
+        return view('contribuyente.create-edit', $data);
     }
 
     /**
@@ -124,7 +124,7 @@ class ContribuyenteController extends Controller
     {
         $giros = Giro::all();
         if ($giros->isEmpty()){
-            return [];
+            return array();
         }
         $girosArray = 
         $giros->mapWithKeys(function($item){

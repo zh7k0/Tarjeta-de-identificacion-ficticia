@@ -14,6 +14,6 @@ class Giro extends Model
     ];
 
     public function contribuyentes(){
-        $this->hasMany(Contribuyente::class);
+        $this->hasMany('App\Contribuyente');
     }
 }

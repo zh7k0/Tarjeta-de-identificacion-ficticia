@@ -2,6 +2,9 @@
 @section('title', 'Giros Comerciales')
 
 @section('content')
+@if (session('message'))
+<div class="message popup {{ session('status') ? 'success': 'error'}}">{{ session('message') }}</div>
+@endif
 <div class="table">
     <div class="table__row table__header">
         <div class="table__cell">Cod. Giro</div>

@@ -24,7 +24,7 @@ class GiroFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required'
+            'nombre' => 'required|max:100'
         ];
     }
 
@@ -32,7 +32,8 @@ class GiroFormRequest extends FormRequest
     {
         return [
             'required' => 'Por favor ingrese descripción del giro.',
-            'unique' => 'Giro ya existe.'
+            'unique' => 'Giro ya existe.',
+            'max' => 'Giro demasiado largo, el máximo permitido es 100 carácteres.'
         ];
     }
 }

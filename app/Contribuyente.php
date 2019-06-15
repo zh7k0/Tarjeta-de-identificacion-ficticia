@@ -27,4 +27,10 @@ class Contribuyente extends Model
     {
         return $this->belongsTo('App\Giro');
     }
+
+    //Recupera todos los servicios que ha contratado la empresa/cliente
+    public function serviciosContratados()
+    {
+        return $this->hasMany('App\ServicioContratado', 'contribuyentes__rut', 'rut');
+    }
 }

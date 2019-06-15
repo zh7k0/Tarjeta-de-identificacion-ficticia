@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico')}}">
 </head>
 <body>
-    @include('layout.navbar')
+    @include('layout._navbar')
     <main class="main-content">
         @yield('content')
     </main>
