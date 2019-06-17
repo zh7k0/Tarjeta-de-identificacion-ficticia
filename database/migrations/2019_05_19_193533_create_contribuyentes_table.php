@@ -21,7 +21,7 @@ class CreateContribuyentesTable extends Migration
             $table->string('domicilio', 100);
             $table->string('comuna', 100)->nullable();
             $table->unsignedInteger('giro_id');
-            $table->decimal('variabilidad_cobros', 3, 2);
+            $table->decimal('variabilidad_cobros', 3, 2)->default(0.1);
             // $table->softDeletes();
             $table->primary('rut');
             $table->foreign('giro_id')

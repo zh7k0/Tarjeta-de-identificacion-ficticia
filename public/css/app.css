@@ -672,8 +672,8 @@ body {
 }
 
 .card {
-  width: 453px;
-  height: 226px;
+  width: 86mm;
+  height: 54mm;
   border: 1px solid black;
   position: relative;
   margin: 2em auto;
@@ -681,11 +681,11 @@ body {
 }
 
 .card__content {
-  height: 155.4px;
+  height: 35.9mm;
   padding: 12px 18px;
   border-top: 12px solid orange;
   border-bottom: 12px solid orange;
-  width: 417px;
+  width: 76.475mm;
 }
 
 .card__section {
@@ -698,7 +698,7 @@ body {
   text-align: center;
   padding: 6px 0;
   background-color: #082d4b;
-  height: 10.6px;
+  height: 2.225mm;
 }
 
 .card__title {
@@ -707,8 +707,8 @@ body {
 }
 
 .card__logo {
-  width: 151px;
-  height: 56.5px;
+  width: 28.6666666667mm;
+  height: 13.5mm;
 }
 
 .card__logo img {

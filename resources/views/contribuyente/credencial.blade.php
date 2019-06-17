@@ -45,7 +45,7 @@
                         
                         </td>
                         <td class="card__logo">
-                            <img src="{{ asset('images/cfe_logo.png')}}" alt="Logo SII">
+                            <img src="{{ asset('storage/images/cfe_logo.png')}}" alt="Logo SII">
                         </td>
                     </tr>
                 </table>

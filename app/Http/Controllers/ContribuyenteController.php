@@ -12,6 +12,12 @@ class ContribuyenteController extends Controller
 {
     private $nombre = "Empresa";
 
+    public function __construct()
+    {
+        $this->middleware('sanitization.input')->only('store', 'update');
+
+    }
+
     public function index()
     {
         $contribuyentes = Contribuyente::with('giro')->get();
@@ -140,8 +146,8 @@ class ContribuyenteController extends Controller
      */
     public function renderPdf(Contribuyente $contribuyente)
     {
-        // return view('credencial', ['contribuyente' => $contribuyente]);
-        $pdf = PDF::loadView('credencial', ['contribuyente' => $contribuyente]);
+        return view('contribuyente.credencial', ['contribuyente' => $contribuyente]);
+        $pdf = PDF::loadView('contribuyente.credencial', ['contribuyente' => $contribuyente]);
         $pdf->setPaper('A5', 'landscape');
         return $pdf->stream('credencial_'.$contribuyente->rut.'.pdf', array('attachment' => 0));
     }

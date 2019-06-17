@@ -19,6 +19,11 @@ class Servicio extends Model
 
     public $timestamps = false;
 
+    public function getRouteKeyName()
+    {
+        return 'tipo_servicio';
+    }
+
     public function configFactura()
     {
         return $this->hasOne('App\ConfigFactura', 'servicios__tipo_servicio');

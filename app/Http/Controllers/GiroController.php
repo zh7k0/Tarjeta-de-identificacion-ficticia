@@ -7,6 +7,13 @@ use App\Http\Requests\GiroFormRequest;
 
 class GiroController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('sanitization.input')->only(['store', 'update']);
+
+    }
+    
     /**
      * Display a listing of the resource.
      *

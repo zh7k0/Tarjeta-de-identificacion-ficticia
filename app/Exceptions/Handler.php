@@ -52,22 +52,35 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceof \Illuminate\Database\QueryException){
+            // dd($request, $exception);
             $errorCode = $exception->getCode();
             $message = "Error : ";
             switch($errorCode)
             {
                 case 23000:
-                    $sql = $exception->getSql();
-                    $message .= Str::contains($sql, 'giros') ? "Giro ya existe." : "Razón social ya existe.";
-                    return back()->withErrors($message)->withInput();
+                //Codigo para entrada duplicada en columna con constraint Unique
+                    if ((int) $exception->errorInfo[1] == 1062)
+                    {
+                        $sql = $exception->getSql();
+                        if (Str::contains($sql, 'giros')){
+                            $message .= 'Giro ya existe.';
+                        }
+                        elseif (Str::contains($sql, 'contribuyentes')){
+                            $message .= 'Empresa con el nombre indicado ya existe';
+                        }
+                        elseif (Str::contains($sql, 'servicios')){
+                            $message .= 'Servicio con el nombre indicado ya existe';
+                        }
+                        return back()->withErrors($message)->withInput();
+                    }
+                    break;
+                // Código para conexión denegada por la BD.
                 case 2002:
                     return response()->view('errors.500', ['error' => "No se puede conectar con la Base de Datos.\nPor favor reinicie la conexión."]);
             }
-            return response($exception->getMessage().'<br>Codigo:'.$exception->getCode());
+            return response('Oops! Algo sucedió. Regresa más tarde. <br>Código error:'.$exception->errorInfo[1]);
         }
-        // if($exception instanceof PDOException){
-        //     return response()->view('errors.500', [], 500);
-        // }
+        
         return parent::render($request, $exception);
     }
 }

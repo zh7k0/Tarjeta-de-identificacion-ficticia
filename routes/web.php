@@ -23,6 +23,7 @@ Route::get('/empresas/{contribuyente}/render', 'ContribuyenteController@renderPd
 Route::get('rut/{rut}', 'Rut@calcularRut');
 
 Route::resource('giros', 'GiroController');
-Route::get('/pdf', 'ContribuyenteController@pdf');
+
+Route::resource('servicios', 'ServicioController');
 
 Route::redirect('/', 'empresas');
