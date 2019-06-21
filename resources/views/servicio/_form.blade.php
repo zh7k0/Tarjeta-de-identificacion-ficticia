@@ -30,9 +30,10 @@
 </div>
 
 @if ($method == 'post')
-<div class="form__field">
-{!! Form::label('logo', 'Logo Servicio', ['class' => 'form__label']) !!}
+<div class="form__field flex-col-reverse full-width">
+{!! Form::label('logo', 'Cargar Logo', ['class' => 'form__label btn btn--green btn--square']) !!}
 {!! Form::file('logo', ['class' => 'form__input', 'accept' => '.png']) !!}
+<span for='logo'>...</span>
 </div>
 @endif
 

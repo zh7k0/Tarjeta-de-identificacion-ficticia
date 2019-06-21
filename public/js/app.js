@@ -49915,6 +49915,8 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./contratar */ "./resources/js/contratar.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -50082,6 +50084,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_51777872_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/contratar.js":
+/*!***********************************!*\
+  !*** ./resources/js/contratar.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+function insertFirstRow() {
+  //Agrega la primera fila
+  $('<div/>', {
+    'class': 'table__row extra-row',
+    html: getHtml()
+  }).appendTo('#servicioData .table');
+  $('#num_detalles').val(1); //Agrega una nueva fila cada vez que es clickeado
+
+  $('#addRow').click(function () {
+    $('<div/>', {
+      'class': 'table__row extra-row',
+      html: getHtml()
+    }).hide().appendTo('#servicioData .table').slideDown('slow');
+    var num_items = $('.extra-row').length;
+    $('#num_detalles').val(num_items);
+  });
+  $('#delRow').click(function () {
+    var num_items = $('.extra-row').length;
+
+    if (num_items > 1) {
+      $('.extra-row:last-child').slideUp('slow', function (e) {
+        $('.extra-row:last-child').remove();
+        $('#num_detalles').val(num_items - 1);
+      });
+    }
+  });
+}
+
+function getHtml() {
+  var len = $('.extra-row').length;
+  var $html = $('.template-row').clone();
+  $html.find('[name=detalle]')[0].name = "detalle" + len;
+  $html.find('[name=cantidad]')[0].name = "cantidad" + len;
+  $html.find('[name=porc_precio]')[0].name = "porc_precio" + len;
+  return $html.html();
+}
+
+$(document).ready(function () {
+  if (document.querySelector('#servicioData')) {
+    insertFirstRow();
+    console.log('Columna insertada');
+  }
+});
 
 /***/ }),
 

@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico')}}">
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
     @include('layout._navbar')

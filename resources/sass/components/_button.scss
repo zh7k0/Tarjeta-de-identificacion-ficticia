@@ -24,6 +24,7 @@
     color: $primary-lighter;
 }
 
+// Color Modificators
 .btn--red {
     background-color: red;
     border: 1px solid $secondary-color;
@@ -35,6 +36,14 @@
     border: 1px solid red;
     color: red;
 }
+
+.btn--green {
+    background-color: $green;
+    border-color: #fff;
+    color: #fff;
+}
+
+//Size Modificators
 
 .btn--xsmall {
     max-width: 1.5rem;

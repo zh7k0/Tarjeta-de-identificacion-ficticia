@@ -11,6 +11,7 @@
 |
 */
 
+Route::redirect('/', 'empresas');
 
 Route::get('/empresas', 'ContribuyenteController@index')->name('lista_contribuyentes');
 Route::get('/empresas/new', 'ContribuyenteController@create')->name('nuevo_contribuyente');
@@ -20,10 +21,14 @@ Route::get('/empresas/{contribuyente}/edit', 'ContribuyenteController@edit')->na
 Route::get('/empresas/{contribuyente}', 'ContribuyenteController@show')->name('mostrar_contribuyente');
 Route::delete('/empresas/{contribuyente}', 'ContribuyenteController@destroy');
 Route::get('/empresas/{contribuyente}/render', 'ContribuyenteController@renderPdf');
+
 Route::get('rut/{rut}', 'Rut@calcularRut');
 
 Route::resource('giros', 'GiroController');
 
 Route::resource('servicios', 'ServicioController');
 
-Route::redirect('/', 'empresas');
+Route::get('/empresas/{contribuyente}/servicios', 'ServicioContratadoController@index');
+Route::get('/empresas/{contribuyente}/contratar_servicio/', 'ServicioContratadoController@contratarServicio');
+Route::post('/empresas/{contribuyente}', 'ServicioContratadoController@store');
+Route::delete('/empresas/{contribuyente}/servicio/{servicio}', 'ServicioContratadoController@destroy');

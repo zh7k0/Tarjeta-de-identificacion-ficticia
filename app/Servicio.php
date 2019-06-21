@@ -9,7 +9,7 @@ class Servicio extends Model
     protected $fillable = ['tipo_servicio', 'razon_social', 
                         'rut', 'giro', 'domicilio', 'comuna', 'url_logo'];
 
-    protected $primaryKey = 'rut';
+    protected $primaryKey = 'tipo_servicio';
 
     //Tells that primary isn't auto incrementing
     public $incrementing = false;

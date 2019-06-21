@@ -55,6 +55,7 @@ class Handler extends ExceptionHandler
             // dd($request, $exception);
             $errorCode = $exception->getCode();
             $message = "Error : ";
+            // dd($exception->getMessage());
             switch($errorCode)
             {
                 case 23000:

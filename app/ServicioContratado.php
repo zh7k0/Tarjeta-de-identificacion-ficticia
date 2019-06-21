@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class ServicioContratado extends Model
 {
@@ -19,6 +20,56 @@ class ServicioContratado extends Model
                             'cantidades', 'porc_por_detalle', 'tarifa'
                         ];
 
+    
+    /**
+     * ===============MUTATORS==================
+     */
+
+    /**
+     * @param array $value
+     * 
+     */
+    public function setDetallesAttribute($values)
+    {
+        if (is_null($values)){
+            $this->attributes['detalles'] = null;
+            return;
+        }
+
+        if (is_array($values)){
+            $this->attributes['detalles'] = implode(';', $values);
+            return;
+        }
+    }
+
+    public function setCantidadesAttribute($values)
+    {
+        if (is_null($values)){
+            $this->attributes['cantidades'] = null;
+            return;
+        }
+
+        if (is_array($values)){
+            $this->attributes['cantidades'] = implode(';', $values);
+            return;
+        }
+    }
+
+    public function setPorcPorDetalleAttribute($values)
+    {
+        if (is_null($values)){
+            $this->attributes['porc_por_detalle'] = null;
+            return;
+        }
+
+        if (is_array($values)){
+            $this->attributes['porc_por_detalle'] = implode(';', $values);
+            return;
+        }
+    }
+     /**
+      * ==============END MUTATORS===================
+      */
     public function servicio()
     {
         return $this->belongsTo('App\Servicio', 'servicios__tipo_servicio', 'tipo_servicio');
@@ -28,5 +79,14 @@ class ServicioContratado extends Model
     {
         return $this->belongsTo('App\Contribuyente', 'contribuyentes__rut', 'rut');
     }
+
+    protected function setKeysForSaveQuery(Builder $query)
+    {
+        $query
+            ->where('contribuyentes__rut', '=', $this->getAttribute('contribuyentes__rut'))
+            ->where('servicios__tipo_servicio', '=', $this->getAttribute('servicios__tipo_servicio'));
+        return $query;
+    }
+
     
 }

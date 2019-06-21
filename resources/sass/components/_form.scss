@@ -36,8 +36,21 @@
     border: 1px solid $red;
 }
 
-.form__label::after {
+.required::after {
     content: "*";
     color: red;
 }
 
+//hack input type=file styling
+.form__input[type='file'] {
+    display: none;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.flex-col-reverse {
+    flex-direction: column-reverse;
+}
