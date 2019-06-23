@@ -6,7 +6,7 @@
         <div class="table__cell">Giro</div>
         <div class="table__cell">Domicilio</div>
         <div class="table__cell">Comuna</div>
-        <!-- <div class="table__cell">Logo</div> -->
+        <div class="table__cell"></div>
         <div class="table__cell"></div>
     </div>
     @forelse ($servicios as $servicio)

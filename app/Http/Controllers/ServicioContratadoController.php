@@ -6,11 +6,11 @@ use App\ServicioContratado;
 use App\Contribuyente;
 use App\Servicio;
 use App\Http\Requests\ServContratadoFormRequest;
-use App\Traits\ConfigFactura;
+use App\Traits\Factura\DetallesFactura;
 
 class ServicioContratadoController extends Controller
 {
-    use ConfigFactura;
+    use DetallesFactura;
 
     /**
      * Display a listing of the resource.
@@ -69,7 +69,7 @@ class ServicioContratadoController extends Controller
             return back()->withInput()->withErrors('No se pudo guardar el servicio.');
         }
         return redirect()->action('ServicioContratadoController@index', ['contribuyente' => $rut])
-                    ->with(['message' => 'Actualizado correctamente.', 'status' => true]);
+                    ->with(['message' => 'Ingresado correctamente.', 'status' => true]);
     }
 
     /**

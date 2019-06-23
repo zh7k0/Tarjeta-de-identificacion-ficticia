@@ -21,6 +21,8 @@ class Factura extends Model
                             'neto', 'iva', 'dia_venc', 'anio_venc', 'mes_venc'
                         ];
     
+    protected $casts = ['folio' => 'integer', 'neto' => 'integer', 'iva' => 'integer', 'total' => 'integer'];
+
     //Recupera información del servicio que emite la factura
     public function servicio()
     {

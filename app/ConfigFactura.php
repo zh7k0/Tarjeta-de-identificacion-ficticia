@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Factura\hasDetallesFactura;
 
 class ConfigFactura extends Model
 {
+    use hasDetallesFactura;
+
+
     protected $table = 'config_facturas';
     protected $primaryKey = 'servicios__tipo_servicio';
 
@@ -17,7 +21,7 @@ class ConfigFactura extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['servicios__tipo_servicio', 'detalles', 'cantidades', 'porcen_por_detalle'];
+    protected $fillable = ['servicios__tipo_servicio', 'detalles', 'cantidades', 'porc_por_detalle'];
 
     public function servicio()
     {

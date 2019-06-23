@@ -21,7 +21,10 @@ class ContribuyenteController extends Controller
     public function index()
     {
         $contribuyentes = Contribuyente::with('giro')->get();
-        return view('contribuyente.lista_contribuyentes', ['contribuyentes' => $contribuyentes, 'title' => $this->nombre.'s']);
+        $data['contribuyentes'] = $contribuyentes;
+        $data['title'] = $this->nombre . 's';
+        // $data['date'] = \date('d/m/Y');
+        return view('contribuyente.index', $data);
     }
 
     /**

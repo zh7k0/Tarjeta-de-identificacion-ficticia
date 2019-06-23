@@ -15,7 +15,7 @@ class Contribuyente extends Model
 
     protected $fillable = [
         'razon_social', 'rut', 'dig_verificador', 'tipo_contribuyente', 'domicilio',
-        'giro_id'
+        'giro_id', 'variabilidad_cobros', 'comuna',
     ];
 
     public function getRouteKeyName()

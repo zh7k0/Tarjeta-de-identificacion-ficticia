@@ -14,4 +14,5 @@
 <div>
     <a class="btn btn--squre btn--md" href="{{ action('ServicioContratadoController@contratarServicio', $rutContribuyente)}}">Agregar</a>
 </div>
+
 @endsection

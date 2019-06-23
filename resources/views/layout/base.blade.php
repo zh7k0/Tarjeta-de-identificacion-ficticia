@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico')}}">
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
-<body>
+<body id='app'>
     @include('layout._navbar')
     <main class="main-content">
         @yield('content')

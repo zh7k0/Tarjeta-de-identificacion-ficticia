@@ -24,10 +24,10 @@
                     <a class="btn btn--xsmall btn--red btn--square" id="delRow">-</a>
                 </div>
             </fieldset>
-        </div>
-        <input type="hidden" value="0" name="num_detalles" id="num_detalles">
+    </div>
+    <input type="hidden" value="0" name="num_detalles" id="num_detalles">
         
-        <div class="form__field">
-            <button class="btn">Agregar</button>
-        </div>
+    <div class="form__field">
+        <button class="btn">Agregar</button>
+    </div>
 {!! Form::close() !!}

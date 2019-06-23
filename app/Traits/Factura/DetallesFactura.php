@@ -1,10 +1,10 @@
 <?php
-namespace App\Traits;
+namespace App\Traits\Factura;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-trait ConfigFactura 
+trait DetallesFactura 
 {
 
     /**

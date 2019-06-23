@@ -26,9 +26,14 @@ Route::get('rut/{rut}', 'Rut@calcularRut');
 
 Route::resource('giros', 'GiroController');
 
-Route::resource('servicios', 'ServicioController');
+Route::resource('/servicios', 'ServicioController')->except('show');
 
 Route::get('/empresas/{contribuyente}/servicios', 'ServicioContratadoController@index');
 Route::get('/empresas/{contribuyente}/contratar_servicio/', 'ServicioContratadoController@contratarServicio');
 Route::post('/empresas/{contribuyente}', 'ServicioContratadoController@store');
 Route::delete('/empresas/{contribuyente}/servicio/{servicio}', 'ServicioContratadoController@destroy');
+
+Route::post('/servicios/{servicio}', 'ConfigFacturaController@store');
+Route::get('/servicios/{servicio}/config_factura', 'ConfigFacturaController@create');
+
+Route::get('/empresas/{contribuyente}/facturar/{servicio}', 'FacturaController@store');

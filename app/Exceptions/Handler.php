@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Str;
+use \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,12 +52,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof \Illuminate\Database\QueryException){
+        if ($exception instanceof \Illuminate\Database\QueryException){
             // dd($request, $exception);
             $errorCode = $exception->getCode();
             $message = "Error : ";
             // dd($exception->getMessage());
-            switch($errorCode)
+            switch ($errorCode)
             {
                 case 23000:
                 //Codigo para entrada duplicada en columna con constraint Unique
@@ -79,9 +80,13 @@ class Handler extends ExceptionHandler
                 case 2002:
                     return response()->view('errors.500', ['error' => "No se puede conectar con la Base de Datos.\nPor favor reinicie la conexión."]);
             }
-            return response('Oops! Algo sucedió. Regresa más tarde. <br>Código error:'.$exception->errorInfo[1]);
+            return response('Oops! Algo sucedió. Regresa más tarde. <br>Código error:'.$exception->errorInfo[1].'Error: '.$exception->getMessage());
         }
         
+        if ($exception instanceof MethodNotAllowedHttpException){
+            // return redirect('/');
+        }
+
         return parent::render($request, $exception);
     }
 }

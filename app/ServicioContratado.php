@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Traits\Factura\hasDetallesFactura;
 
 class ServicioContratado extends Model
 {
+    use hasDetallesFactura;
+
+
     protected $table = 'servicios_contratados';
     protected $primaryKey = ['contribuyentes__rut', 'servicios__tipo_servicio'];
 
@@ -20,56 +24,6 @@ class ServicioContratado extends Model
                             'cantidades', 'porc_por_detalle', 'tarifa'
                         ];
 
-    
-    /**
-     * ===============MUTATORS==================
-     */
-
-    /**
-     * @param array $value
-     * 
-     */
-    public function setDetallesAttribute($values)
-    {
-        if (is_null($values)){
-            $this->attributes['detalles'] = null;
-            return;
-        }
-
-        if (is_array($values)){
-            $this->attributes['detalles'] = implode(';', $values);
-            return;
-        }
-    }
-
-    public function setCantidadesAttribute($values)
-    {
-        if (is_null($values)){
-            $this->attributes['cantidades'] = null;
-            return;
-        }
-
-        if (is_array($values)){
-            $this->attributes['cantidades'] = implode(';', $values);
-            return;
-        }
-    }
-
-    public function setPorcPorDetalleAttribute($values)
-    {
-        if (is_null($values)){
-            $this->attributes['porc_por_detalle'] = null;
-            return;
-        }
-
-        if (is_array($values)){
-            $this->attributes['porc_por_detalle'] = implode(';', $values);
-            return;
-        }
-    }
-     /**
-      * ==============END MUTATORS===================
-      */
     public function servicio()
     {
         return $this->belongsTo('App\Servicio', 'servicios__tipo_servicio', 'tipo_servicio');

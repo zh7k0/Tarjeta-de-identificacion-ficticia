@@ -53,11 +53,11 @@ class ServicioController extends Controller
     {
         /**
          * Tratamos de subir el logo primero, sino se puede subir
-         * regresamos a la anterior ubicación para que intenten
+         * regresamos al formulario para que intenten
          * con una imagen válida.
          */
         $logo = $request->file('logo');
-        $urlLogo = $this->uploadLogo($logo, $request->tipo_servicio);
+        $urlLogo = $this->uploadLogo($logo, $request->tipo_servicio, 'images/servicios');
 
         if ( ! $urlLogo){
             return back()->with(['message' => 'No se pudo subir el logo',
@@ -74,9 +74,14 @@ class ServicioController extends Controller
             'comuna' => $request->comuna,
             'url_logo' => $urlLogo
         ]);
-
+        
+        /**
+         * Si el servicio fue creado exitosamente, redirigimos
+         * al formulario para crear el detalle por defecto del
+         * servicio.
+         */
         if ( ! empty($servicio)){
-            return redirect()->action('ServicioController@index');
+            return redirect()->action('ConfigFacturaController@create', ['servicio' => $servicio->tipo_servicio]);
         } else {
             return back()->withInput()->with(['message' => 'No se pudo guardar servicio.',
                                             'status' => false,
@@ -123,7 +128,7 @@ class ServicioController extends Controller
          * Verificamos si dentro de los campos por actualizar se actualizo
          * el nombre del servicio, de ser así intentamos primero actualizar
          * el nombre del logo almacenado.
-         * Si no es posible renombrarlo regresamos al form con el error
+         * Si no es posible renombrarlo regresamos al formulario con el error
          * correspondiente.
          */
         if ($request->has('tipo_servicio') && $request->tipo_servicio != $servicio->tipo_servicio){
@@ -154,14 +159,14 @@ class ServicioController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina el servicio de la BD.
      *
      * @param  \App\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
     public function destroy(Servicio $servicio)
     {
-        //Removemos primero el logo
+        //Removemos primero el logo.
         $logoRemoved = $this->deleteLogo($servicio->url_logo);
         // dd($logoRemoved);
         if ( ! $logoRemoved){
@@ -169,8 +174,9 @@ class ServicioController extends Controller
         }
 
         $deleted = $servicio->delete();
+        //Eliminamos el detalle asociado despues de la eliminacion del servicio.
         if ($deleted){
-            return back()->with(['message' => 'Eliminado servicio correctamente', 'status' => true]);
+            return redirect()->action('ServicioController@index');
         }
         return back()->with(['message' => 'No se pudo eliminar servicio.', 'status' => false]);
     }

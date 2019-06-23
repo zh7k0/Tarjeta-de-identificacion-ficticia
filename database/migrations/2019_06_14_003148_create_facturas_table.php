@@ -30,10 +30,12 @@ class CreateFacturasTable extends Migration
             $table->primary(['contribuyentes__rut', 'servicios__tipo_servicio', 'mes_emision', 'anio_emision'], 'facturas_pk');
             $table->foreign('contribuyentes__rut')
                     ->references('rut')->on('contribuyentes')
-                    ->onUpdate('cascade');
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->foreign('servicios__tipo_servicio')
                     ->references('tipo_servicio')->on('servicios')
-                    ->onUpdate('cascade');
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
 
 
         });

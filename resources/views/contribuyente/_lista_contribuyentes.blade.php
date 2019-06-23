@@ -1,10 +1,3 @@
-@extends('layout.base')
-@section('title', $title)
-
-@section('content')
-@if (session('message'))
-<div class="message popup {{ session('status') ? 'success': 'error'}}">{{ session('message') }}</div>
-@endif
 <div class="table">
     
     <div class='table__row table__header'>
@@ -39,7 +32,3 @@
         <div class="table__row"><div class="table__cell">Sin contribuyentes.</div></div>
     @endforelse
 </div>
-<div>
-    <a class="btn btn--squre btn--md" href="{{ route('nuevo_contribuyente')}}">Agregar</a>
-</div>
-@endsection

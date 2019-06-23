@@ -17,7 +17,7 @@ class CreateConfigFacturasTable extends Migration
             $table->string('servicios__tipo_servicio')->primary();
             $table->string('detalles', 450);
             $table->string('cantidades', 100)->nullable();
-            $table->string('porcen_por_detalle', 50);
+            $table->string('porc_por_detalle', 50);
 
             $table->foreign('servicios__tipo_servicio')
                     ->references('tipo_servicio')->on('servicios')
