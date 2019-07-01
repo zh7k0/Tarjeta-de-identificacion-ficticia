@@ -23,16 +23,43 @@ class Factura extends Model
     
     protected $casts = ['folio' => 'integer', 'neto' => 'integer', 'iva' => 'integer', 'total' => 'integer'];
 
+
+    /**
+     * ==================== Relationships ====================
+     */
     //Recupera información del servicio que emite la factura
     public function servicio()
     {
-        return belongsTo('App\Servicio', 'servicios__tipo_servicio', 'tipo_servicio');
+        return $this->belongsTo('App\Servicio', 'servicios__tipo_servicio', 'tipo_servicio');
     }
 
     //Recupera la información del cliente que recibe la factura
     public function contribuyente()
     {
-        return belongsTo('App\Contribuyente', 'contribuyentes__rut', 'rut');
+        return $this->belongsTo('App\Contribuyente', 'contribuyentes__rut', 'rut');
     }
 
+    /**
+     * ==================== Accessors ====================
+     */
+    
+     public function getFechaEmisionAttribute()
+     {
+        return $this->parsearFecha($this->dia_emision, $this->mes_emision, $this->anio_emision);
+     }
+
+     public function getFechaVencimientoAttribute()
+     {
+        return $this->parsearFecha($this->dia_venc, $this->mes_venc, $this->anio_venc);
+     }
+     /**
+      * ==================== Mutators ====================
+      */
+
+    private function parsearFecha($dia, $mes, $anio)
+    {
+        $d = \str_pad($dia, 2, '0', STR_PAD_LEFT);
+        $m = \str_pad($mes, 2, '0', STR_PAD_LEFT);
+        return "{$d}/{$m}/{$anio}";
+    }      
 }

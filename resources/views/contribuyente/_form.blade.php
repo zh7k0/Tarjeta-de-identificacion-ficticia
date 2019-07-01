@@ -27,7 +27,7 @@
 </div>
 
 <div class="form__field full-width">
-    <button class="btn">Agregar</button>
+    <button class="btn">Guardar</button>
 </div>
 {!! Form::close() !!}
 

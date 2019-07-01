@@ -7,5 +7,6 @@
         <li class="navbar__link"><a href="{{ route('lista_contribuyentes') }}">Empresas</a></li>
         <li class="navbar__link"><a href="{{ action('GiroController@index')}}">Giros</a></li>
         <li class="navbar__link">{!! Html::linkAction('ServicioController@index', 'Servicios') !!} </li>
+        <li class="navbar__link"><a href="{{ action('FacturaController@index')}}">Facturas</a></li>
     </ul>
 </aside>

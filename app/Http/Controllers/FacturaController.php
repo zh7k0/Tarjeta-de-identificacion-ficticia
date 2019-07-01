@@ -10,19 +10,34 @@ use Illuminate\Http\Request;
 use App\Traits\Factura\FolioFactura;
 use App\Traits\Factura\hasFecha;
 use App\Traits\Factura\VerificarExistenciaFactura;
+use App\Traits\Factura\FacturaPDF;
 
 class FacturaController extends Controller
 {
-    use FolioFactura, hasFecha, VerificarExistenciaFactura;
+    use FolioFactura, hasFecha, VerificarExistenciaFactura, FacturaPDF;
 
     /**
-     * Display a listing of the resource.
-     *
+     * Muestra la lista de todas las facturas si $rut no es especificado,
+     * en caso contrario muestra solo las facturas del $rut indicado
+     * @param string $rut = null
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(string $rut = null)
     {
-        //
+        if (is_null($rut)){
+            $data['title'] = 'Facturas';
+            $data['facturas'] = Factura::all()
+                            ->sortBydesc('anio_emision')
+                            ->sortBydesc('mes_emision')
+                            ->sortBydesc('dia_emision');
+            return view('factura.index', $data);
+        }
+        //Recuperamos las facturas asociadas al rut
+        $facturas = Factura::where('contribuyentes__rut', $rut)->get();
+        $contribuyente = Contribuyente::where('rut', $rut)->first();
+        $data['title'] = 'Facturas ' . $contribuyente->razon_social;
+        $data['facturas'] = $facturas;
+        return view('factura.index', $data);
     }
 
 
@@ -67,7 +82,7 @@ class FacturaController extends Controller
         $total = mt_rand($minRand, $maxRand);
         $neto = round($total / 1.19);
         $iva = $total - $neto;
-        
+
         //Creamos la factura en la BD.
         $created = Factura::create([
             'folio' => $this->getNewFolio($servicio->tipo_servicio), 
@@ -95,9 +110,17 @@ class FacturaController extends Controller
      * @param  \App\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $factura)
+    public function show($servicio, $folio)
     {
-        //
+        $factura = Factura::where([
+            ['servicios__tipo_servicio', $servicio],
+            ['folio', $folio]
+            ])->first();
+        if (is_null($factura)){
+            return view('errors.404');
+        }
+        return $this->generarFactura($factura);
+        
     }
 
     /**

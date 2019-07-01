@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contribuyente;
+use App\Factura;
 use App\Http\Requests\ContribuyenteFormRequest;
 use Facades\App\Http\Controllers\Rut;
 use App\Giro;
@@ -78,7 +79,17 @@ class ContribuyenteController extends Controller
      */
     public function show(Contribuyente $contribuyente)
     {
-        return view('pdf_frame', array('contribuyente' => $contribuyente));
+        $mesActual = date('m');
+        $data['contribuyente'] = $contribuyente;
+        $data['facturas'] = Factura::where([
+                ['contribuyentes__rut', $contribuyente->rut],
+                ['mes_emision', $mesActual]
+                ])->get();
+        $data['facturasPorVencer'] = Factura::where([
+                ['contribuyentes__rut', $contribuyente->rut],
+                ['mes_venc', $mesActual]
+                ])->get();
+        return view('contribuyente.dashboard', $data);
     }
 
     /**
@@ -149,7 +160,7 @@ class ContribuyenteController extends Controller
      */
     public function renderPdf(Contribuyente $contribuyente)
     {
-        return view('contribuyente.credencial', ['contribuyente' => $contribuyente]);
+        // return view('contribuyente.credencial', ['contribuyente' => $contribuyente]);
         $pdf = PDF::loadView('contribuyente.credencial', ['contribuyente' => $contribuyente]);
         $pdf->setPaper('A5', 'landscape');
         return $pdf->stream('credencial_'.$contribuyente->rut.'.pdf', array('attachment' => 0));

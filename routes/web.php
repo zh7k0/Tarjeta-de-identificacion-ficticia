@@ -20,9 +20,8 @@ Route::put('/empresas/{contribuyente}', 'ContribuyenteController@update')->name(
 Route::get('/empresas/{contribuyente}/edit', 'ContribuyenteController@edit')->name('editar_contribuyente');
 Route::get('/empresas/{contribuyente}', 'ContribuyenteController@show')->name('mostrar_contribuyente');
 Route::delete('/empresas/{contribuyente}', 'ContribuyenteController@destroy');
-Route::get('/empresas/{contribuyente}/render', 'ContribuyenteController@renderPdf');
+Route::get('/empresas/{contribuyente}/credencial', 'ContribuyenteController@renderPdf');
 
-Route::get('rut/{rut}', 'Rut@calcularRut');
 
 Route::resource('giros', 'GiroController');
 
@@ -37,3 +36,5 @@ Route::post('/servicios/{servicio}', 'ConfigFacturaController@store');
 Route::get('/servicios/{servicio}/config_factura', 'ConfigFacturaController@create');
 
 Route::get('/empresas/{contribuyente}/facturar/{servicio}', 'FacturaController@store');
+Route::get('/facturas/{rut?}', 'FacturaController@index');
+Route::get('/facturas/{servicio}/{folio}', 'FacturaController@show');
