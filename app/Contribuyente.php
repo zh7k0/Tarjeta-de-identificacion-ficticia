@@ -33,4 +33,21 @@ class Contribuyente extends Model
     {
         return $this->hasMany('App\ServicioContratado', 'contribuyentes__rut', 'rut');
     }
+
+    /**
+     * ================ ACCESSORS ================
+     */
+
+
+    public function getRutCompletoAttribute()
+    {
+        $partesRut = array();
+        $rut = (string)$this->rut;
+        $partesRut[0] =  strlen($rut) <= 8 ? substr($rut, 0, 2) : substr($rut, 0, 3);
+        $partesRut[1] = substr($rut, -6, 3);
+        $partesRut[2] = \substr($rut, -3);
+        $parsedRut = implode('.', $partesRut);
+        $rutCompleto = $parsedRut . "-" . $this->dig_verificador;
+        return $rutCompleto;
+    }
 }

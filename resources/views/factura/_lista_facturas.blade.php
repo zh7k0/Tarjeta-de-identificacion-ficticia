@@ -20,7 +20,7 @@
         <div class="table__cell">{{ number_format($factura->iva, 0, ',', '.') }}</div>
         <div class="table__cell">{{ number_format($factura->total, 0, ',', '.') }}</div>
         <div class="table__cell"><a class="btn btn--md" href="{{ action('FacturaController@show', 
-                                        ['servicio' => $factura->servicios__tipo_servicio, 'folio' => $factura->folio]) }}">Ver Factura
+                                        ['servicio' => $factura->servicios__tipo_servicio, 'folio' => $factura->folio]) }}" target="_blank">Ver Factura
         </a></div>
     </div>
     @empty

@@ -3,7 +3,7 @@ namespace App\Traits\Factura;
 
 trait hasDetallesFactura {
     /**
-     * ===============MUTATORS==================
+     * ============== MUTATORS ==============
      */
 
     /**
@@ -49,8 +49,27 @@ trait hasDetallesFactura {
             return;
         }
     }
-     /**
-      * ==============END MUTATORS===================
-      */
+    /**
+      * ============== END MUTATORS ==============
+     */
+
+    /**
+     * ============== ACCESSORS ==============
+     */
+
+    public function getDetallesAttribute()
+    {
+        return explode(';', $this->attributes['detalles']);
+    }
+
+    public function getCantidadesAttribute()
+    {
+        return explode(';', $this->attributes['cantidades']);
+    }
+
+    public function getPorcPorDetalleAttribute()
+    {
+        return explode(';', $this->attributes['porc_por_detalle']);
+    }
 }
 ?>

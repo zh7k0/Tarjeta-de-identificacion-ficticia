@@ -6,7 +6,7 @@
 
 <div class="form__field fourth-width">
     {!! Form::label('giro_id', 'Giro', ['class' => 'form__label']) !!}
-    {!! Form::select('giro_id', $giros, null, ['class' => 'form__input']) !!}
+    {!! Form::input('giro_id', null, ['class' => 'form__input']) !!}
 </div>
 
 <!-- <div class="form__field">
